@@ -24,3 +24,13 @@ On a different terminal do the same for the client folder
 ```bash
   npm start
 ```
+
+## How the App works
+
+A simple "New Game" button is rendered when the App runs.
+
+when clicked it calls the server requesting for a new game to be created.
+The server then responds with an object representing the board and useful information.
+
+When a slot is clicked, the app calls the server passing the slot number,
+the server checks if the move is valid and if the move results in a win and then responds accordingly.
