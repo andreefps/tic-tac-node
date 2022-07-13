@@ -1,0 +1,61 @@
+html {
+  background-color: #444444;
+  font: sans-serif;
+}
+
+.container {
+  margin-top: 40px;
+}
+
+.game-board {
+  width: 500px;
+  height: 500px;
+  margin: 20px auto;
+  background-color: #747474;
+  color: #b1b1b1;
+  border: 6px solid #b1b1b1;
+  border-radius: 10px;
+
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+}
+
+.box {
+  border: 6px solid #b1b1b1;
+  border-radius: 2px;
+  font-family: Helvetica;
+  font-weight: bold;
+  font-size: 4em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.matchingTile {
+  background: #f5f9e9;
+}
+
+.winMessage {
+  margin: auto;
+  height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: #f5f9e9;
+  border-radius: 8px;
+  display: block;
+}
+
+.newGameButton {
+  margin: auto;
+  height: 40px;
+  width: 160px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: #444444;
+  border-radius: 8px;
+  background-color: #b1b1b1;
+  display: block;
+  cursor: pointer;
+}
