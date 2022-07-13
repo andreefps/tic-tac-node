@@ -1,5 +1,3 @@
-// server/index.js
-
 import Express from "express";
 import cors from "cors";
 import path from "path";
@@ -32,11 +30,18 @@ app.post(
   "/play:id&:tile&:player",
   (req: Express.Request<Move>, res: Express.Response<Game>) => {
     let currentgame = games.find((games) => games.id === req.params.id);
-    if (currentgame && !currentgame.gameOver) {
+    if (
+      currentgame &&
+      !currentgame.gameOver &&
+      currentgame.tiles[req.params.tile].length === 0
+    ) {
       currentgame.tiles[req.params.tile] = req.params.player;
       currentgame = isWinningMove(currentgame, req.params.player);
-      res.json(currentgame);
     }
+    if (currentgame?.tiles.filter((tile) => tile.length > 0).length === 9) {
+      currentgame.gameOver = true;
+    }
+    res.json(currentgame);
   }
 );
 

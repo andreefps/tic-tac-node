@@ -62,6 +62,13 @@ function App() {
             matchingTiles={matchingTiles}
           />
         )}
+        {board?.gameOver && (
+          <strong className={"winMessage"}>
+            {board.matchingTiles.length < 3
+              ? "Game Over"
+              : `Player ${isPlayerOneTurn ? "1" : "2"} won !`}
+          </strong>
+        )}
       </div>
     </div>
   );

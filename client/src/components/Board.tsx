@@ -28,11 +28,6 @@ export const Board = ({
             </div>
           ))}
       </div>
-      {board && board.gameOver && (
-        <strong className={"winMessage"}>
-          Player {isPlayerOneTurn ? "1" : "2"} won !
-        </strong>
-      )}
     </div>
   );
 };
