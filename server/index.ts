@@ -8,6 +8,8 @@ const games: Game[] = [];
 const app = Express();
 
 app.use(cors({ origin: "*" }));
+app.use(Express.json());
+
 app.use(Express.static(path.resolve(__dirname, "../client/build")));
 
 app.get("/game/:id", (req: Express.Request<Game>, res: Express.Response) => {
@@ -27,20 +29,18 @@ app.post("/game", (req, res) => {
 });
 
 app.post(
-  "/play:id&:tile&:player",
-  (req: Express.Request<Move>, res: Express.Response<Game>) => {
-    let currentgame = games.find((games) => games.id === req.params.id);
-    if (
-      currentgame &&
-      !currentgame.gameOver &&
-      currentgame.tiles[req.params.tile].length === 0
-    ) {
-      currentgame.tiles[req.params.tile] = req.params.player;
-      currentgame = isWinningMove(currentgame, req.params.player);
+  "/play",
+  (req: Express.Request<{}, {}, Move>, res: Express.Response<Game>) => {
+    const { id, tile, player } = req.body;
+    let currentgame = games.find((games) => games.id === id);
+    if (!currentgame) {
+      return res.status(400).end();
     }
-    if (currentgame?.tiles.filter((tile) => tile.length > 0).length === 9) {
-      currentgame.gameOver = true;
+    if (currentgame.gameOver || currentgame.tiles[tile].length > 0) {
+      return res.status(400).end();
     }
+    currentgame.tiles[tile] = player;
+    currentgame = isWinningMove(currentgame, player);
     res.json(currentgame);
   }
 );

@@ -30,11 +30,11 @@ function App() {
 
   async function handlePlay(tileIndex: Number) {
     if (board && !board.gameOver) {
-      const { data } = await axios.post(
-        `http://localhost:3001/play${board.id}&${tileIndex}&${
-          isPlayerOneTurn ? "X" : "O"
-        }`
-      );
+      const { data } = await axios.post(`http://localhost:3001/play`, {
+        id: board.id,
+        tile: tileIndex,
+        player: isPlayerOneTurn ? "X" : "O",
+      });
       setBoard(data);
       if (!data.gameOver) {
         setIsPlayerOneTurn(!isPlayerOneTurn);
